@@ -2,7 +2,7 @@
 
 A single scroll-scrubbed landing page that flies you through a lost city. As you scroll, a pre-rendered camera flies from outside each scene into its interior, then flows into the next — one continuous connected flight, no cuts. A non-commercial fan tribute to Atlantis.
 
-**Live demo:** _(added after deploy)_
+**Live demo:** https://argus-atlantis.vercel.app
 
 ![Argus — the city rises from the sea](screenshots/hero.png)
 
