@@ -1,0 +1,11 @@
+# Dev-only asset pipeline (300 MB renders + Higgsfield job manifests with account IDs)
+work/
+
+# Tooling caches / config
+.claude/
+.playwright-cli/
+
+# OS / logs
+.DS_Store
+Thumbs.db
+*.log

@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Argus — Fly through Atlantis</title>
+  <meta name="description" content="Scroll to fly over the ocean and through the lost city of Atlantis — pier to spire to gate room, one continuous flight." />
+  <style>
+    :root, .sw-root {
+      --sw-bg: #0E1A24;          /* dark slate — matches the scenes' ocean/night ground */
+      --sw-ink: #DCF3F5;         /* ice accent */
+      --sw-ink-soft: #8FB0BC;
+      --sw-accent: #2FD8D0;      /* Lantean teal glow */
+    }
+    body { background: #0E1A24; }
+    /* Text protection: scrim panel + shadow so copy reads on any frame */
+    .sw-root .sw-copy {
+      background: rgba(10, 20, 30, 0.48) !important;
+      -webkit-backdrop-filter: blur(14px) saturate(1.1);
+      backdrop-filter: blur(14px) saturate(1.1);
+      border: 1px solid rgba(220, 243, 245, 0.10);
+      border-radius: 18px;
+      padding: 26px 30px !important;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+      text-shadow: 0 1px 10px rgba(0, 0, 0, 0.55);
+    }
+    .sw-root .sw-nav {
+      background: rgba(10, 20, 30, 0.45) !important;
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      border-radius: 999px;
+      text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+      border-color: rgba(220, 243, 245, 0.14) !important;
+    }
+    .sw-root .sw-nav__item { color: rgba(220, 243, 245, 0.75) !important; }
+    .sw-root .sw-nav__item:hover { color: #fff !important; }
+    .sw-root .sw-nav__item.is-active {
+      color: #06222A !important;
+      background: var(--sw-accent) !important;
+      font-weight: 600;
+      text-shadow: none;
+    }
+    /* Route rail labels: dark glass, centered on their dot */
+    .sw-root .sw-route__label {
+      background: rgba(10, 20, 30, 0.72) !important;
+      color: #DCF3F5 !important;
+      border: 1px solid color-mix(in srgb, var(--sw-accent) 40%, transparent) !important;
+      top: 50% !important;
+      transform: translateY(-50%) !important;
+      text-shadow: none;
+    }
+    .sw-root .sw-route__dot:hover .sw-route__label,
+    .sw-root .sw-route__dot.is-active .sw-route__label {
+      transform: translateY(-50%) !important;
+    }
+    /* Route dots: engine grid centering drifts ~3px right of the line — pin to true center */
+    .sw-root .sw-route__dot { position: relative; padding: 0 !important; }
+    .sw-root .sw-route__dot i {
+      position: absolute !important; left: 50% !important; top: 50% !important;
+      transform: translate(-50%, -50%) !important;
+    }
+    .sw-root .sw-route__dot:hover i { transform: translate(-50%, -50%) scale(1.25) !important; }
+    .sw-root .sw-route__dot.is-active i { transform: translate(-50%, -50%) scale(1.4) !important; }
+    /* Dark-theme buttons: engine default paints primary with --sw-ink (pale here) */
+    .sw-root .sw-btn--primary {
+      background: #2FD8D0 !important;
+      color: #06222A !important;
+      text-shadow: none;
+      box-shadow: 0 0 24px rgba(47, 216, 208, 0.45);
+    }
+    .sw-root .sw-btn--ghost {
+      color: #DCF3F5 !important;
+      border-color: rgba(220, 243, 245, 0.4) !important;
+      background: rgba(10, 20, 30, 0.35);
+    }
+    /* Tag pills: dark glass + light accent text instead of pale fill */
+    .sw-root .sw-copy__tags li {
+      background: rgba(10, 20, 30, 0.55) !important;
+      color: color-mix(in srgb, var(--sw-accent) 75%, #fff) !important;
+      border: 1px solid color-mix(in srgb, var(--sw-accent) 45%, transparent) !important;
+      text-shadow: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="top"></div>
+  <div id="world">
+    <section data-sw-seo>
+      <h1>It rises from the sea.</h1>
+      <p>Argus is a fan tribute to the lost city of Atlantis — scroll and fly over the ocean and through the city, pier to spire to gate room, in one continuous flight.</p>
+      <h2>The lost city — It rises from the sea.</h2>
+      <p>After ten thousand years beneath the waves, Atlantis has returned to the surface.</p>
+      <h2>The threshold — The gate stands open.</h2>
+      <p>The ring stands active in the great hall, its event horizon shimmering beneath stained-glass light.</p>
+      <h2>The heart — The city listens.</h2>
+      <p>Crystal consoles and a floating schematic of the city keep watch above the gate room.</p>
+      <h2>The city — A world above the water.</h2>
+      <p>Towers, balconies and piers stretch over the open ocean, alive with light.</p>
+      <h2>The summit — Take the city.</h2>
+      <p>The chair is waiting. Step through and take your place among the Ancients.</p>
+      <p><a href="#top">Enter Atlantis</a></p>
+    </section>
+  </div>
+
+  <script src="scrub-engine.js"></script>
+  <script>
+    mountScrollWorld(document.getElementById('world'), {
+      brand: { name: 'Argus', href: '#top' },
+      hint: 'scroll to fly in',
+      crossfade: 0.22,
+      diveScroll: 1.3,
+      connScroll: 0.9,
+      sections: [
+        {
+          id: 'approach', label: 'The Approach',
+          still: 'assets/scene1_approach.webp?v=f1',
+          poster: 'assets/scene1-poster.webp?v=f1',
+          clip: 'assets/vid/dive1.mp4?v=f1',
+          clipMobile: 'assets/vid/dive1-m.mp4?v=f1',
+          posterMobile: 'assets/scene1-poster-m.webp?v=f1',
+          accent: '#2FD8D0',
+          scroll: 1.6, linger: 0.4,
+          eyebrow: 'The lost city',
+          title: 'It rises from the sea.',
+          body: 'After ten thousand years beneath the waves, Atlantis has returned to the surface.',
+          tags: ['Lantean', 'Ocean'],
+        },
+        {
+          id: 'gateroom', label: 'The Gate Room',
+          still: 'assets/scene2_gateroom.webp?v=f1',
+          poster: 'assets/scene2-poster.webp?v=f1',
+          clip: 'assets/vid/dive2.mp4?v=f1',
+          clipMobile: 'assets/vid/dive2-m.mp4?v=f1',
+          posterMobile: 'assets/scene2-poster-m.webp?v=f1',
+          accent: '#DCF3F5',
+          scroll: 1.4, linger: 0.35,
+          eyebrow: 'The threshold',
+          title: 'The gate stands open.',
+          tags: ['Stargate', 'Threshold'],
+        },
+        {
+          id: 'control', label: 'Operations',
+          still: 'assets/scene3_control.webp?v=f1',
+          poster: 'assets/scene3-poster.webp?v=f1',
+          clip: 'assets/vid/dive3.mp4?v=f1',
+          clipMobile: 'assets/vid/dive3-m.mp4?v=f1',
+          posterMobile: 'assets/scene3-poster-m.webp?v=f1',
+          accent: '#F2B45A',
+          eyebrow: 'The heart',
+          title: 'The city listens.',
+          tags: ['Ancient tech', 'Control'],
+        },
+        {
+          id: 'piers', label: 'The City',
+          still: 'assets/scene4_piers.webp?v=f1',
+          poster: 'assets/scene4-poster.webp?v=f1',
+          clip: 'assets/vid/dive4.mp4?v=f1',
+          clipMobile: 'assets/vid/dive4-m.mp4?v=f1',
+          posterMobile: 'assets/scene4-poster-m.webp?v=f1',
+          accent: '#2FD8D0',
+          eyebrow: 'The city',
+          title: 'A world above the water.',
+          tags: ['Spires', 'Piers'],
+        },
+        {
+          id: 'tower', label: 'The Command Tower',
+          still: 'assets/scene5_tower.webp?v=f1',
+          poster: 'assets/scene5-poster.webp?v=f1',
+          clip: 'assets/vid/dive5.mp4?v=f1',
+          clipMobile: 'assets/vid/dive5-m.mp4?v=f1',
+          posterMobile: 'assets/scene5-poster-m.webp?v=f1',
+          accent: '#F2B45A',
+          scroll: 1.8, linger: 0.5,
+          eyebrow: 'The summit',
+          title: 'Take the city.',
+          body: 'The chair is waiting. Step through and take your place among the Ancients.',
+          tags: ['Command'],
+          cta: { primary: { label: 'Enter Atlantis', href: '#top' } },
+        },
+      ],
+      connectors: [
+        'assets/vid/conn1.mp4?v=f1',
+        'assets/vid/conn2.mp4?v=f1',
+        'assets/vid/conn3.mp4?v=f1',
+        'assets/vid/conn4.mp4?v=f1',
+      ],
+      connectorsMobile: [
+        'assets/vid/conn1-m.mp4?v=f1',
+        'assets/vid/conn2-m.mp4?v=f1',
+        'assets/vid/conn3-m.mp4?v=f1',
+        'assets/vid/conn4-m.mp4?v=f1',
+      ],
+    });
+  </script>
+</body>
+</html>
